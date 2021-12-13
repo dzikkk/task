@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { add, assoc, assocPath, evolve, forEach, keys, path, pathOr, pipe, reduce, toPairs } from "ramda";
+import { add, assoc, assocPath, concat, evolve, forEach, keys, path, pathOr, pipe, reduce, toPairs } from "ramda";
 import { metricsActions } from '../actions/metricsActions';
 import { metricsState } from "../state/metricsState";
 
@@ -35,24 +35,24 @@ const processTurbineData = (acc, {bucket, turbine, energyProduced, energyLost}) 
 
 const grupTurbineData = reduce(processTurbineData, {});
 const calculateTurbineMonths = turbineData => {
-  forEach(month => {
-    const [produced, lost, worst] = reduce((acc, [_, {produced, lost, availability, name}]) => {
+  return reduce((acc, month) => {
+    const [produced, lost, worst] = reduce((turbineAcc, [_, {produced, lost, availability, name}]) => {
       return [
-        add(acc[0], produced),
-        add(acc[1], lost),
-        acc[2].value < availability && acc[2].name ? acc[2] : {name, value: availability},
+        add(turbineAcc[0], produced),
+        add(turbineAcc[1], lost),
+        turbineAcc[2].value < availability && turbineAcc[2].name ? turbineAcc[2] : {name, value: availability},
       ];
     }, [0, 0, {name: '', value: 0}], toPairs(path([month, 'turbines'], turbineData)));
 
-    turbineData = assoc(month, {
+    return acc.concat({
+      ...turbineData[month],
       produced,
       lost,
       availability: calculateAvailability(produced, lost),
       worst,
-    }, turbineData)
-  }, keys(turbineData));
-
-  return turbineData;
+      month,
+    });
+  }, [], keys(turbineData));
 }
 
 const parseTurbineData = pipe(grupTurbineData, calculateTurbineMonths);
