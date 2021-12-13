@@ -5,13 +5,26 @@ import * as React from 'react';
 export const FilterWrapper = styled('div')(({theme }) => ({
   backgroundColor: theme.palette.background.default,
   color: theme.palette.text.primary,
-  padding: 24,
+  padding: '24px 32px',
+  border: `2px solid ${theme.palette.primary.dark}`,
+  alignSelf: 'center',
+  marginTop: 24,
+  borderRadius: 15,
 }));
 
 
 const TitleHeader = styled('h3')(({theme}) => ({
-  marginBottom: 40,
+  margin: 0,
+  marginBottom: 8,
+  color: theme.palette.primary.main,
+  fontWeight: 'normal',
+  textAlign: 'center',
 }));
+
+const StyledLabel =styled('span')({
+  margin: '0 10px',
+  lineHeight: '29px',
+})
 
 function generateMenuItems(option, idx) {
   return (<MenuItem value={idx+1}>{option}</MenuItem>);
@@ -28,7 +41,6 @@ export const MonthFilters = ({
     <FilterWrapper>
       <TitleHeader>Show data between</TitleHeader>
       <FormControl>
-        <InputLabel>From</InputLabel>
         <Select
           id="demo-simple-select"
           value={values.from}
@@ -38,8 +50,8 @@ export const MonthFilters = ({
           {dateSelectItems}
         </Select>
       </FormControl>
+      <StyledLabel> and </StyledLabel>
       <FormControl>
-        <InputLabel>To</InputLabel>
         <Select
           id="demo-simple-select"
           value={values.to}
