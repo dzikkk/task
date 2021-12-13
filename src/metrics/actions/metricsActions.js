@@ -6,9 +6,11 @@ const fetchDataAction = {
   failed: createAction('[METRICS ACTION] Metrics Failed'),
 }
 
+const changeFilterAction = createAction('[METRICS ACTION] ChangeFilter');
 const clearAction = createAction('[METRICS ACTION] Clear');
 
 export const metricsActions = {
   fetchData: fetchDataAction,
+  changeFilter: changeFilterAction,
   clear: clearAction,
 }

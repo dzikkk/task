@@ -1,6 +1,6 @@
 import { styled } from "@material-ui/styles"
-import { AvailabilityValue } from "../../layout/labels/AvailabilityValue";
-import { HighlightedValue } from "../../layout/labels/highlightedLabel";
+import { AvailabilityValue } from "../../../layout/labels/AvailabilityValue";
+import { HighlightedValue } from "../../../layout/labels/highlightedLabel";
 
 const TileWrapper = styled('div')(({theme}) => ({
   display: 'flex',

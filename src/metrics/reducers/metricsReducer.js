@@ -1,11 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit"
 import { add, assoc, assocPath, evolve, keys, path, pathOr, pipe, reduce, toPairs } from "ramda";
 import { metricsActions } from '../actions/metricsActions';
-import { metricsState } from "../state/metricsState";
-
-const months = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+import { metricsState, months } from "../state/metricsState";
 
 function getMonth(date) {
   return months[(new Date(date).getMonth())];
@@ -65,6 +61,10 @@ export const metricsReducer = createReducer(metricsState(), (builder) => {
     .addCase(metricsActions.fetchData.success, (state, action) => {
       state.data = parseTurbineData(action.payload);
       state.isLoading = false;
+    })
+    .addCase(metricsActions.changeFilter, (state, action) => {
+      state.from = action.payload.from;
+      state.to = action.payload.to;
     })
     .addCase(metricsActions.fetchData.failed, (state) => {
       state.data = [];

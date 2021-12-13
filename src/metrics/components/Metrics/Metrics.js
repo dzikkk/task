@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { styled } from '@material-ui/styles';
 import * as React from 'react';
-import { FlexWrapper } from '../../layout/Wrappers/FlexWrapper';
+import { FlexWrapper } from '../../../layout/Wrappers/FlexWrapper';
 import { MetricTile } from './MetricTile';
 
 export const MetricsWrapper = styled('div')(({theme }) => ({
