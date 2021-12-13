@@ -6,7 +6,7 @@ function* fetchMetrics({payload}) {
   if(payload.from && payload.to) {
     try{
       const {data} = yield call(metricsQuery, payload);
-      yield put(metricsActions.fetchData.success(data))
+      yield put(metricsActions.fetchData.success(data));
     } catch (err) {
       yield put(metricsActions.fetchData.failed(err));
     }
