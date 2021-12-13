@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { add, assoc, assocPath, concat, evolve, forEach, keys, path, pathOr, pipe, reduce, toPairs } from "ramda";
+import { add, assoc, assocPath, evolve, keys, path, pathOr, pipe, reduce, toPairs } from "ramda";
 import { metricsActions } from '../actions/metricsActions';
 import { metricsState } from "../state/metricsState";
 

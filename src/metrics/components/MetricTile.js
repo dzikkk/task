@@ -9,7 +9,7 @@ const TileWrapper = styled('div')(({theme}) => ({
   paddingTop: 8,
   borderRadius: 8,
   backgroundColor: theme.palette.background.paper,
-  margin: 16,
+  margin: '0 24px 24px 0',
 }))
 
 const MonthLabel = styled('h4')(({theme}) => ({
